@@ -1,0 +1,19 @@
+.create-container {
+    display: grid;
+}
+
+.create-container h1 {
+    text-align: center;
+}
+
+.create-container .saveButton-container {
+    text-align: center;
+}
+
+.create-container .createForm-container {
+    display: flex;
+}
+
+.create-container .createForm-container Form{
+    flex: auto, 50%
+}
