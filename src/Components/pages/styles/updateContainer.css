@@ -1,0 +1,35 @@
+.update-container {
+    display: grid;
+}
+
+.idAndDelete-container {
+    display: inline-block;
+    padding: 1% 1.5% 1% 1.5%;
+    
+}
+
+.idAndDelete-container h2 {
+    text-align: center;
+    float: left;
+    padding: 0 0;
+    margin: 0 0;
+}
+
+.idAndDelete-container .deleteButton-container {
+    text-align: center;
+    float: right;
+    padding: 0 0;
+    margin: 0 0;
+}
+
+.update-container .updateButton-container {
+    text-align: center;
+}
+
+.update-container .createForm-container {
+    display: flex;
+}
+
+.update-container .createForm-container Form {
+    flex: auto, 50%
+}
