@@ -1,34 +1,28 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import './index.css';
-import { Breadcrumb, Layout, Menu } from 'antd';
+import './styles/index.css';
+import { Layout } from 'antd';
+import HeaderComponent from './Components/common/Header';
+import TemperatureList from './Components/pages/TemperatureList';
+import CreateContainer from './Components/pages/CreateContainer'
+import UpdateContainer from './Components/pages/UpdateContainer';
 
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 
 const App: React.FC = () => (
-  <Layout>
-    <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-      <div className="logo" />
-      <Menu
-        theme="dark"
-        mode="horizontal"
-        defaultSelectedKeys={['2']}
-        items={new Array(3).fill(null).map((_, index) => ({
-          key: String(index + 1),
-          label: `nav ${index + 1}`,
-        }))}
-      />
-    </Header>
-    <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
-      <Breadcrumb style={{ margin: '16px 0' }}>
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>List</Breadcrumb.Item>
-        <Breadcrumb.Item>App</Breadcrumb.Item>
-      </Breadcrumb>
-      <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
-        Content
-      </div>
+
+  <Layout className="layout">
+    <HeaderComponent/>
+
+    <Content style={{ padding: '1.8% 3%' }}>
+      <div className="site-layout-content">Content</div>
+      <TemperatureList/>
+      <p>----</p>
+      <CreateContainer/>
+      <p>----</p>
+      <UpdateContainer/>
     </Content>
+
     <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
   </Layout>
 );
