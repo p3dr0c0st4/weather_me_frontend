@@ -1,11 +1,11 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import './styles/index.css';
-import './styles/App.css';
+
 
 import { Layout } from 'antd';
-import HeaderComponent from './Components/common/Header';
-import MainPage from './Components/pages/MainPage';
+import HeaderComponent from './components/common/Header';
+import MainPage from './pages/MainPage';
 
 const { Content, Footer } = Layout;
 

@@ -1,9 +1,8 @@
 import React from 'react';
 import '../../App';
-import '../../styles/App.css'
 import { Space, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import {sensorDto} from '../dtos/sensorDto';
+import {sensorDto} from '../../services/dtos/sensorDto';
 
 
   const columns: ColumnsType<sensorDto> = [

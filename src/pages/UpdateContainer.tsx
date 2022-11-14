@@ -1,12 +1,10 @@
 import React from 'react';
-import './styles/updateContainer.css';
-import CreateForm from '../common/CreateForm';
-import DeleteButton from '../common/crudButtons/Delete';
-import UpdateButton from '../common/crudButtons/Update';
+import CreateForm from '../components/common/CreateForm';
+import DeleteButton from '../components/common/crudButtons/Delete';
+import UpdateButton from '../components/common/crudButtons/Update';
 
 
-class UpdateContainer extends React.Component {
-    render () {
+export default () => {
         return (
             <div className='update-container'>
 
@@ -22,8 +20,5 @@ class UpdateContainer extends React.Component {
                 
             </div>
         )
-    }
+    
 }
-
-
-export default UpdateContainer;

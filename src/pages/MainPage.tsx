@@ -1,15 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import TemperatureList from './TemperatureList';
-import CreateContainer from './CreateContainer'
+import CreateContainer from './CreateTemperature'
 import UpdateContainer from './UpdateContainer';
 
 
-class MainPage extends React.Component {
-
-    
- 
-    render() {
-        // const [active, setAtive] = useState("temperatureList");
+export default () => {      
 
         return (
             <div className='mainPage-component'>
@@ -20,7 +15,6 @@ class MainPage extends React.Component {
                 <UpdateContainer />
             </div>
         );
-    }
+    
 }
 
-export default MainPage;
