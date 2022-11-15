@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 import './styles/index.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from 'antd';
-import HeaderComponent from './components/Header';
+import Header from './components/Header';
 import MainPage from './pages/MainPage';
 import TemperaturePage from './pages/temperature/TemperaturePage';
 
@@ -11,7 +11,7 @@ export default () => {
     return (
         <Layout>
             <BrowserRouter>
-                <HeaderComponent />
+                <Header />
 
                 <Routes>
                     <Route path="/" element={<MainPage />} />
