@@ -1,7 +1,7 @@
 import React from 'react';
-import CreateForm from '../components/common/CreateForm';
-import DeleteButton from '../components/common/crudButtons/Delete';
-import UpdateButton from '../components/common/crudButtons/Update';
+import CreateForm from '../Components/common/CreateForm';
+import DeleteButton from '../Components/common/crudButtons/Delete';
+import UpdateButton from '../Components/common/crudButtons/Update';
 
 
 export default () => {

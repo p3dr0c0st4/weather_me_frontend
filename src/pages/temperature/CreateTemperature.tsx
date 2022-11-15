@@ -1,7 +1,7 @@
 import { Space } from 'antd';
 import React from 'react';
-import CreateForm from '../components/common/CreateForm';
-import SaveButton from '../components/common/crudButtons/Save';
+import CreateForm from '../Components/common/CreateForm';
+import SaveButton from '../Components/common/crudButtons/Save';
 
 
 export default () => {

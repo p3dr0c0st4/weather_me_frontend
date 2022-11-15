@@ -1,7 +1,7 @@
 import { Col, Divider, Row, Space } from 'antd';
 import React from 'react';
-import ContainerList from '../components/common/ContainerList';
-import CreateButton from '../components/common/crudButtons/Create';
+import ContainerList from '../Components/common/ContainerList';
+import CreateButton from '../Components/common/crudButtons/Create';
 
 
 export default () => {
