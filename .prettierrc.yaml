@@ -2,5 +2,9 @@
 semi: true # semicolons when necessary.
 trailingComma: "none" # will remove any trailing commas at the end of objects.
 singleQuote: true # prefer single quotes instead of double quotes
-printWidth: 80 # printer will wrap any lines that exceed 80 characters.
+bracketSpacing: true # Print spaces between brackets.
+printWidth: 100 # printer will wrap any lines that exceed 80 characters.
 tabWidth: 4 # spaces per indentation level.
+
+
+
