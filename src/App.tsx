@@ -1,26 +1,28 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import './styles/index.css';
-
-
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from 'antd';
-import HeaderComponent from './components/common/Header';
+import HeaderComponent from './Components/common/Header';
 import MainPage from './pages/MainPage';
+import TemperaturePage from './pages/TemperaturePage';
 
 const { Content, Footer } = Layout;
 
 const App: React.FC = () => (
 
-  <Layout className="layout">
-    <HeaderComponent/>
+  <Layout>
+      <BrowserRouter>
+      <HeaderComponent />
 
-    <Content style={{ padding: '1.8% 3%' }}>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/temperature" element={<TemperaturePage />} />
+        {/* <Route path="/humidity" element={<HumidityPage />} /> */}
+      </Routes>
+    </BrowserRouter>
 
-      <MainPage />  
 
-    </Content>
-
-    <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
   </Layout>
 );
 
