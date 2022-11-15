@@ -1,27 +1,30 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Menu, Col, Row } from 'antd';
 
-import { Layout, Menu } from 'antd';
+const HeaderComponent = () => {
+  return (
 
-const { Header } = Layout;
-
-
-  const HeaderComponent = () => { 
-    return(
-      
-             <Header id='header-container'>
-                 
-                 <Menu theme="dark"
-                    mode="horizontal"
-                    id="headers-menu">
-
-                    <Menu.Item id='temperature' key={1}>Temperature</Menu.Item>
-                    <Menu.Item id='humidity' key={2}>Humidity</Menu.Item>
-                    
-                    <Menu.Item id='login' key={3}>Login</Menu.Item>
-
-                </Menu>
-            </Header>
-    )
-  }
+    <Row>
+    <Col flex="auto">
+      <Menu theme="dark"
+        mode="horizontal">
+           <Menu.Item key={1}>
+          <Link to='/'>WeatherMe</Link>
+        </Menu.Item>
+        <Menu.Item key={2}>
+          <Link to='/temperature'>Temperature</Link>
+        </Menu.Item>
+        <Menu.Item key={3}> 
+          <Link to='/humidity'>Humidity</Link>
+        </Menu.Item>
+        <Menu.Item key={4}> 
+          <Link to='/login'>Login</Link>
+        </Menu.Item>
+      </Menu>
+      </Col>
+      </Row>
+  )
+}
 
 export default HeaderComponent
