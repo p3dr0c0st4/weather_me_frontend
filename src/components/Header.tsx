@@ -7,18 +7,21 @@ export default () => {
         <Row>
             <Col flex="auto">
                 <Menu theme="dark" mode="horizontal">
-                    <Menu.Item key={1}>
-                        <Link to="/">WeatherMe</Link>
-                    </Menu.Item>
-                    <Menu.Item key={2}>
-                        <Link to="/temperature">Temperature</Link>
-                    </Menu.Item>
-                    <Menu.Item key={3}>
-                        <Link to="/humidity">Humidity</Link>
-                    </Menu.Item>
-                    <Menu.Item key={4}>
-                        <Link to="/login">Login</Link>
-                    </Menu.Item>
+                        <Menu.Item key={'weatherMe'} >
+                            <Link to="/">WeatherMe</Link>
+                        </Menu.Item>
+
+                        <Menu.Item key={'temperature'}>
+                            <Link to="/temperature">Temperature</Link>
+                        </Menu.Item>
+
+                        <Menu.Item key={'humidity'}>
+                            <Link to="/humidity">Humidity</Link>
+                        </Menu.Item>
+
+                        <Menu.Item key={'login'} style={{ position:'absolute', right:'0px', width:'10%', textAlign:'center'}} >
+                            <Link to="/login">Login</Link>
+                        </Menu.Item>
                 </Menu>
             </Col>
         </Row>
