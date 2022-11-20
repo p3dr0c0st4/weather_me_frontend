@@ -6,13 +6,13 @@ import CreateButton from './../../components/crudButtons/CreateButton';
 export default () => {
     return (
         <>
-            <Divider orientation="left">Humidity</Divider>
+            <Divider orientation="center">Humidity</Divider>
             <Row>
                 <Col push={22} span={4}>
                     <CreateButton key={'create'} />
                 </Col>
 
-                <Col span={24}>
+                <Col span={24} >
                     <ContainerList />
                 </Col>
             </Row>
