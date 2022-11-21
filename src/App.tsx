@@ -1,6 +1,4 @@
 import React from 'react';
-import 'antd/dist/antd.css';
-import './styles/index.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from 'antd';
 import Header from './components/Header';
