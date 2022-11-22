@@ -1,24 +1,21 @@
+import { Button, Space } from 'antd';
 import React from 'react';
 import CreateForm from './../../components/CreateForm';
-import DeleteButton from './../../components/crudButtons/DeleteButton';
-import UpdateButton from './../../components/crudButtons/UpdateButton';
+import {useParams} from "react-router-dom";
 
 export default () => {
+    const { id } = useParams();
+    const onUpdate=()=>{
+        //TODO: call API with id to update
+        console.log('UPDATED', id)
+    }
     return (
-        <div className="update-container">
-            <div className="idAndDelete-container">
-                <h2>to render ID</h2>
-                <div className="deleteButton-container">
-                    <DeleteButton />
-                </div>
-            </div>
-
-            <div className="createForm-container">
-                <CreateForm />
-            </div>
-            <div className="updateButton-container">
-                <UpdateButton />
-            </div>
-        </div>
+        <Space direction="vertical">
+            {id}
+            <CreateForm />
+            <Button  key='update' type='default' onClick={onUpdate}>
+                Update
+            </Button>
+        </Space>
     );
 };

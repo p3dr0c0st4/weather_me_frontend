@@ -1,4 +1,4 @@
-export type sensorDto = {
+export type TemperatureDto = {
     key?: string;
     id: string;
     value: number;

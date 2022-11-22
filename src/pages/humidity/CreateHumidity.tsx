@@ -1,11 +1,13 @@
 import React from 'react';
 import { Button, Space } from 'antd';
 import CreateForm from './../../components/CreateForm';
+import { useNavigate } from 'react-router-dom';
 
 export default () => {
+    const navigate = useNavigate();
     const onSaveClick = ()=>{
-        //TODO: call api with create
-        console.log('CREATE')
+
+console.log('')
     }
     return (
         <Space direction="vertical">

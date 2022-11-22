@@ -1,20 +1,31 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Menu, Col, Row } from 'antd';
 
-
-const items = [
-    { label: 'WeatherMe', key: 'weatherme' }, // remember to pass the key prop
-    { label: 'Temperature', key: 'temperature' }, // which is required
-    { label: 'Humidity', key: 'humidity'},
-    
-  ];
-  const loginItem = [
-    {label: 'Login', key: 'login'}
-  ]
-
-
 export default () => {
+    const navigate = useNavigate();
+    const onMainClick =()=>{
+        navigate('/');
+    }
+    const onTemperatureClick=()=>{
+        navigate('/temperature');
+    }
+    const onHumidityClick=()=>{
+        navigate('/humidity');
+    }
+    const onLoginlick=()=>{
+        navigate('/login');
+    }
+
+    const items = [
+        { label: 'WeatherMe', key: 'weatherme', onClick: onMainClick }, // remember to pass the key prop
+        { label: 'Temperature', key: 'temperature', onClick: onTemperatureClick }, // which is required
+        { label: 'Humidity', key: 'humidity', onClick: onHumidityClick},
+    ];
+    const loginItem = [
+        {label: 'Login', key: 'login', onClick: onLoginlick}
+    ]
+
     return (
         <Row>
             <Col span={23} >
