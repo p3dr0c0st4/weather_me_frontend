@@ -1,10 +1,10 @@
 import React from 'react';
-import '../App';
 import { Space, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { sensorDto } from './../services/dtos/sensorDto';
+import { Link } from 'react-router-dom';
+import { HumidityDto } from '../../services/dtos/HumidityDto';
 
-const columns: ColumnsType<sensorDto> = [
+const columns: ColumnsType<HumidityDto> = [
     {
         title: 'id',
         dataIndex: 'id',
@@ -29,16 +29,16 @@ const columns: ColumnsType<sensorDto> = [
     {
         title: 'action',
         key: 'action',
-        render: () => (
+        render: (_, item) => (
             <Space size="middle">
-                <a>Update </a>
-                <a>Delete</a>
+                <Link to={`/humidity/update/${item.id}`}>Update</Link>
+                <Link to={`/humidity/Delete/${item.id}`}>Delete</Link>
             </Space>
         )
     }
 ];
 
-const data: sensorDto[] = [
+const data: HumidityDto[] = [
     {
         key: '1',
         id: '111-111-111',

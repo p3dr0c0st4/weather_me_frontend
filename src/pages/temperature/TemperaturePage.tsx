@@ -1,19 +1,25 @@
-import { Col, Divider, Row } from 'antd';
+import { Button, Col, Divider, Row } from 'antd';
 import React from 'react';
-import ContainerList from './../../components/ContainerList';
-import CreateButton from './../../components/crudButtons/CreateButton';
+import { useNavigate } from 'react-router-dom';
+import ListTemperature from './ListTemperature';
 
 export default () => {
+    const navigate = useNavigate();
+    const onCreateClick = ()=>{
+        navigate('/temperature/create');
+    }
     return (
-        <>
-            <Divider orientation="left">Temperature</Divider>
+        <> 
+            <Divider orientation="center">Temperature</Divider>
             <Row>
                 <Col push={22} span={4}>
-                    <CreateButton key={'create'} />
+                <Button  key='create' type='primary' onClick={onCreateClick}>
+                    Create
+                </Button>
                 </Col>
 
                 <Col span={24}>
-                    <ContainerList />
+                    <ListTemperature />
                 </Col>
             </Row>
         </>

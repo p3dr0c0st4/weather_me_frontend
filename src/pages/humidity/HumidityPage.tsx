@@ -1,19 +1,25 @@
-import { Col, Divider, Row } from 'antd';
+import { Button, Col, Divider, Row } from 'antd';
 import React from 'react';
-import ContainerList from './../../components/ContainerList';
-import CreateButton from './../../components/crudButtons/CreateButton';
+import { useNavigate } from 'react-router-dom';
+import ListHumidity from './ListHumidity';
 
 export default () => {
+    const navigate = useNavigate();
+    const onCreateClick = ()=>{
+        navigate('/humidity/create');
+    }
     return (
         <>
-            <Divider orientation="left">Humidity</Divider>
+            <Divider orientation="center">Humidity</Divider>
             <Row>
                 <Col push={22} span={4}>
-                    <CreateButton key={'create'} />
+                <Button  key='create' type='primary' onClick={onCreateClick}>
+                    Create
+                </Button>
                 </Col>
 
-                <Col span={24}>
-                    <ContainerList />
+                <Col span={24} >
+                    <ListHumidity />
                 </Col>
             </Row>
         </>
