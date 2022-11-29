@@ -1,7 +1,7 @@
 export type TemperatureDto = {
     key?: string;
     id: string;
-    value: number;
+    temperature: number;
     date: number;
     location: string;
 };
