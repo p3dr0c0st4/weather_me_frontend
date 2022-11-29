@@ -78,21 +78,21 @@ const data: TemperatureDto[] = [
     {
         key: '1',
         id: '111-111-111',
-        value: 10,
+        temperature: 10,
         date: 101010,
         location: 'Maia'
     },
     {
         key: '2',
         id: '222-222-222',
-        value: 20,
+        temperature: 20,
         date: 111111,
         location: 'Ovar'
     },
     {
         key: '3',
         id: '333-333-333',
-        value: 30,
+        temperature: 30,
         date: 121212,
         location: 'Estarreja'
     }

@@ -1,5 +1,6 @@
-import { Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import React from 'react';
+import { create } from '../services/TemperatureService'
 
 export default () => {
     const onFinish = (values: any) => {
@@ -9,6 +10,10 @@ export default () => {
     const onFinishFailed = (errorInfo: any) => {
         console.log('Failed:', errorInfo);
     };
+
+    const onCreateTemp = ()=>(
+        create()
+    )
 
     return (
         <Form
@@ -46,6 +51,9 @@ export default () => {
             >
                 <Input />
             </Form.Item>
+            <Button  key='save' type='primary' onClick={onCreateTemp}>
+                Save
+            </Button>
         </Form>
     );
 };
