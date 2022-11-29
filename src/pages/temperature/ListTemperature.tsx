@@ -3,14 +3,27 @@ import { Space, Table, Modal, Button } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Link } from 'react-router-dom';
 import { TemperatureDto } from '../../services/dtos/TemperatureDto';
+import axios from 'axios';
 
 
 export default () =>{
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [itemId, setItemId] = useState('');
+    const [item, setItem] = useState({});
 
   const handleOk = () => {
     //TODO: call api to Delete id
+    axios.delete(`/${itemId}`)
+        .then(res => {
+                setItem(res.data)
+                console.log('Deleted: '+ item)
+                console.log(res.status)
+
+              })
+             .catch(err => {
+                console.log('errorLog: ' + err)
+            });
+
     console.log('DELETE',itemId)
     setIsModalOpen(false);
   };
