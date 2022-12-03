@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 import React from 'react';
-import CreateForm from './../../components/CreateForm';
+
 
 export default () => {
     return (
@@ -15,7 +15,7 @@ export default () => {
             </div>
 
             <div className="createForm-container">
-                <CreateForm />
+                
             </div>
             <div className="updateButtonElement-container">
             <Button  key='update' type='default'>
