@@ -1,18 +1,26 @@
+import React  from 'react';
 import { Button, Space } from 'antd';
-import React from 'react';
-import CreateForm from './../../components/CreateForm';
 import {useParams} from "react-router-dom";
+import { updateItem } from '../../services/TemperatureService';
+
 
 export default () => {
-    const { id } = useParams();
-    const onUpdate=()=>{
-        //TODO: call API with id to update
-        console.log('UPDATED', id)
+
+    const onUpdate = () =>{
+        updateItem('123', {
+            id: '12',
+            location: 'casa',
+            date:10,
+            temperature: 20,
+        })
     }
+
+    const { id } = useParams();
+
+
     return (
         <Space direction="vertical">
             {id}
-            <CreateForm />
             <Button  key='update' type='default' onClick={onUpdate}>
                 Update
             </Button>

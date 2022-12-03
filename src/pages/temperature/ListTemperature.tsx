@@ -1,19 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Space, Table, Modal, Button } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Link } from 'react-router-dom';
 import { TemperatureDto } from '../../services/dtos/TemperatureDto';
+import {deleteItem, listAll} from '../../services/TemperatureService';
 
 
 export default () =>{
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [itemId, setItemId] = useState('');
+    const [items,setItems] = useState<TemperatureDto[]>([])
 
-  const handleOk = () => {
-    //TODO: call api to Delete id
-    console.log('DELETE',itemId)
-    setIsModalOpen(false);
-  };
+    const fetchAll = async()=>{
+        const all = await listAll()
+        setItems(all)
+    }
+
+    useEffect(()=>{
+        fetchAll().catch((err)=>{console.log(err)});
+    },[itemId])
 
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -24,6 +29,15 @@ export default () =>{
     setIsModalOpen(true);
   }
 
+  const onDelete = async() => {
+    const result = await deleteItem(itemId);
+    setIsModalOpen(false);
+    if(!result){
+        console.log('erro delete')
+        return;
+    }
+    await fetchAll()
+  }
 
   const columns: ColumnsType<TemperatureDto> = [
     {
@@ -61,32 +75,9 @@ export default () =>{
     }
 ];
 
-const data: TemperatureDto[] = [
-    {
-        key: '1',
-        id: '111-111-111',
-        value: 10,
-        date: 101010,
-        location: 'Maia'
-    },
-    {
-        key: '2',
-        id: '222-222-222',
-        value: 20,
-        date: 111111,
-        location: 'Ovar'
-    },
-    {
-        key: '3',
-        id: '333-333-333',
-        value: 30,
-        date: 121212,
-        location: 'Estarreja'
-    }
-];
-  
-  return <><Table columns={columns} dataSource={data} />
-  <Modal title='Delete Item?' open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+    
+  return <><Table columns={columns} dataSource={items} />
+  <Modal title='Delete Item?' open={isModalOpen} onOk={onDelete} onCancel={handleCancel}>
         <p>Delete item {itemId}?</p>
     </Modal></>;
 } 
