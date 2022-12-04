@@ -1,8 +1,7 @@
-import React, { useState }  from 'react';
+import React from 'react';
 import { Button, Form, Input, Space } from 'antd';
 import {useParams} from "react-router-dom";
 import { updateItem } from '../../services/TemperatureService';
-import { TemperatureDto } from '../../services/dtos/TemperatureDto';
 
 
 export default () => {
