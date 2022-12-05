@@ -27,7 +27,7 @@ export default () => {
             >
                 <Form.Item
                     style={{ width: 250 }}
-                    label="Value"
+                    label="Temperature"
                     name="temperature"
                     rules={[{ required: true, message: 'Insert value' }]}
                 >

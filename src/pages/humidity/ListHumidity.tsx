@@ -1,29 +1,64 @@
-import React from 'react';
-import { Space, Table } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Space, Table, Modal, Button } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Link } from 'react-router-dom';
+import {deleteHumidtyItem, listAllHumidity} from '../../services/HumidityService';
 import { HumidityDto } from '../../services/dtos/HumidityDto';
 
-const columns: ColumnsType<HumidityDto> = [
+
+export default () =>{
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [itemId, setItemId] = useState('');
+    const [items,setItems] = useState<HumidityDto[]>([])
+
+    const fetchAll = async()=>{
+        const all = await listAllHumidity()
+        setItems(all)
+    }
+
+    useEffect(()=>{
+        fetchAll().catch((err)=>{console.log(err)});
+    },[itemId])
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+  const showDeleteModal = (id:string)=>{
+    console.log(id)
+    setItemId(id)
+    setIsModalOpen(true);
+  }
+
+  const onDelete = async() => {
+    const result = await deleteHumidtyItem(itemId);
+    setIsModalOpen(false);
+    if(!result){
+        console.log('error delete')
+        return;
+    }
+    await fetchAll()
+  }
+
+  const columns: ColumnsType<HumidityDto> = [
     {
         title: 'id',
         dataIndex: 'id',
-        key: 'id',
+        key: 'idHumidity',
         render: (text) => <a>{text}</a>
     },
     {
-        title: 'value',
-        dataIndex: 'value',
-        key: 'value'
+        title: 'Humidity',
+        dataIndex: 'humidity',
+        key: 'humidity'
     },
     {
         title: 'date',
         dataIndex: 'date',
-        key: 'date'
+        key: 'dateHumidity'
     },
     {
         title: 'location',
-        key: 'location',
+        key: 'locationHumidity',
         dataIndex: 'location'
     },
     {
@@ -32,34 +67,17 @@ const columns: ColumnsType<HumidityDto> = [
         render: (_, item) => (
             <Space size="middle">
                 <Link to={`/humidity/update/${item.id}`}>Update</Link>
-                <Link to={`/humidity/Delete/${item.id}`}>Delete</Link>
+                <Button type='link' onClick={()=>showDeleteModal(item.id)}>
+                    Delete
+                </Button>
             </Space>
         )
     }
 ];
 
-const data: HumidityDto[] = [
-    {
-        key: '1',
-        id: '111-111-111',
-        value: 10,
-        date: 101010,
-        location: 'Maia'
-    },
-    {
-        key: '2',
-        id: '222-222-222',
-        value: 20,
-        date: 111111,
-        location: 'Ovar'
-    },
-    {
-        key: '3',
-        id: '333-333-333',
-        value: 30,
-        date: 121212,
-        location: 'Estarreja'
-    }
-];
-
-export default () => <Table columns={columns} dataSource={data} />;
+    
+  return <><Table columns={columns} dataSource={items} />
+  <Modal title='Delete Item?' open={isModalOpen} onOk={onDelete} onCancel={handleCancel}>
+        <p>Delete item {itemId}?</p>
+    </Modal></>;
+} 
