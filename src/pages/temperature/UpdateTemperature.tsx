@@ -1,7 +1,7 @@
 import React  from 'react';
 import { Button, Form, Input, Space } from 'antd';
 import {useParams} from "react-router-dom";
-import { updateHumidityItem } from '../../services/HumidityService';
+import { updateItem } from '../../services/TemperatureService';
 
 
 
@@ -12,7 +12,7 @@ export default () => {
 
     const onFinish = (values: any) => {
 
-        updateHumidityItem(values.id, values);
+        updateItem(values.id, values);
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -43,8 +43,8 @@ export default () => {
 
                 <Form.Item
                     style={{ width: 250 }}
-                    label='Humidity'
-                    name="humidity"
+                    label='Temperature'
+                    name="temperature"
                     rules={[{ required: true, message: 'Insert value' }]}
                     initialValue='temperature'
                 >

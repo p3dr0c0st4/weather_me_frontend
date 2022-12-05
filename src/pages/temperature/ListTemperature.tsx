@@ -47,9 +47,9 @@ export default () =>{
         render: (text) => <a>{text}</a>
     },
     {
-        title: 'value',
-        dataIndex: 'value',
-        key: 'value'
+        title: 'temperature',
+        dataIndex: 'temperature',
+        key: 'temperature'
     },
     {
         title: 'date',
