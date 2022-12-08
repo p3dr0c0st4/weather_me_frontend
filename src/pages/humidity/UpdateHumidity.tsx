@@ -1,27 +1,85 @@
-import { Button } from 'antd';
-import React from 'react';
+import React  from 'react';
+import { Button, Form, Input, Space } from 'antd';
+import {useParams} from "react-router-dom";
+import { updateHumidityItem } from '../../services/HumidityService';
+
 
 
 export default () => {
-    return (
-        <div className="update-container">
-            <div className="idAndDelete-container">
-                <h2>to render ID</h2>
-                <div className="deleteButtonElement-container">
-                    <Button  key='delete' type='ghost'>
-                        Delete
-                    </Button>
-                </div>
-            </div>
+    
+    const { id } = useParams()
 
-            <div className="createForm-container">
-                
-            </div>
-            <div className="updateButtonElement-container">
-            <Button  key='update' type='default'>
-                Update
-            </Button>
-            </div>
-        </div>
-    );
+
+    const onFinish = (values: any) => {
+
+        updateHumidityItem(values.id, values);
+    };
+
+    const onFinishFailed = (errorInfo: any) => {
+        console.log('Failed:', errorInfo);
+    };
+            
+        return (
+            <>
+            
+            <Space direction="vertical">
+            <Form
+                name="basic"
+                labelCol={{ span: 8 }}
+                wrapperCol={{ span: 16 }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+            >
+                <Form.Item
+                    style={{ width: 250 }}
+                    label='Id'
+                    name="id"
+                    key={'id'}
+                    rules={[{ required: true, message: 'Insert value' }]}
+                    initialValue={id}
+                >
+                    <Input disabled={true} />
+                </Form.Item>
+
+                <Form.Item
+                    style={{ width: 250 }}
+                    label='Temperature'
+                    name="temperature"
+                    key={'temperature'}
+                    rules={[{ required: true, message: 'Insert value' }]}
+                    initialValue='temperature'
+                >
+                    <Input />
+                </Form.Item>
+    
+                <Form.Item
+                    style={{ width: 250 }}
+                    label='Date'
+                    name="date"
+                    key={'date'}
+                    rules={[{ required: true, message: 'Insert date' }]}
+                    initialValue='date'
+                >
+                    <Input/>
+                </Form.Item>
+    
+                <Form.Item
+                    style={{ width: 250 }}
+                    label='Location'
+                    name="location"
+                    key={'location'}
+                    rules={[{ required: true, message: 'Insert location' }]}
+                    initialValue='location'
+                >
+                    <Input />
+                </Form.Item>
+                <Button htmlType="submit"  key='update' type='primary'>
+                    Update
+                </Button>
+            </Form>
+            </Space>
+            </>
+        );
 };
+
