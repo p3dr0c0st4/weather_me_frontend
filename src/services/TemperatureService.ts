@@ -1,3 +1,4 @@
+import CompoundedSpace from 'antd/es/space';
 import axios from 'axios';
 import { TemperatureDto } from './dtos/TemperatureDto';
 
@@ -29,6 +30,20 @@ export const listAll = async (): Promise<TemperatureDto[]> => {
         return [];
     }
 }
+export const getItem = async (id:string): Promise<TemperatureDto | null> => {
+    try {
+            const resp = await axios.get(`${process.env.REACT_APP_API_URL}/temperature/${id}`,{
+                headers:{
+                    'content-type': 'application/json'
+                }
+            });
+            return resp.data.data
+    } catch (error) {
+        console.log(error)
+        return null
+    }
+}
+
 
 export const updateItem = async (id:string, data:TemperatureDto): Promise<boolean> => {
     try {
