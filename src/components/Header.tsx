@@ -18,12 +18,12 @@ export default () => {
     }
 
     const items = [
-        { label: 'WeatherMe', key: 'weatherme', onClick: onMainClick }, // remember to pass the key prop
-        { label: 'Temperature', key: 'temperature', onClick: onTemperatureClick }, // which is required
-        { label: 'Humidity', key: 'humidity', onClick: onHumidityClick},
+        { label: 'WeatherMe', key: 'weathermeHeader', onClick: onMainClick }, // remember to pass the key prop
+        { label: 'Temperature', key: 'temperatureHeader', onClick: onTemperatureClick }, // which is required
+        { label: 'Humidity', key: 'humidityHeader', onClick: onHumidityClick},
     ];
     const loginItem = [
-        {label: 'Login', key: 'login', onClick: onLoginlick}
+        {label: 'Login', key: 'loginHeader', onClick: onLoginlick}
     ]
 
     return (
