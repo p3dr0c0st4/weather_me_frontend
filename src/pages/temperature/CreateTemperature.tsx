@@ -1,19 +1,19 @@
 import React from 'react';
 import { Button, Form, Input, Space } from 'antd';
-import { createItem } from '../../services/TemperatureService';
+import { createTemperatureItem } from '../../services/TemperatureService';
 
 export default () => {
 
 
     const onFinish = (values: any) => {
         console.log('Success:', values);
-        createItem(values)
+        createTemperatureItem(values)
     };
 
     const onFinishFailed = (errorInfo: any) => {
         console.log('Failed:', errorInfo);
     };
-            
+
         return (
             <Space direction="vertical">
             <Form

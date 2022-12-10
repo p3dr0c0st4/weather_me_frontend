@@ -1,8 +1,7 @@
-import CompoundedSpace from 'antd/es/space';
 import axios from 'axios';
 import { TemperatureDto } from './dtos/TemperatureDto';
 
-export const createItem = async (data:TemperatureDto): Promise<boolean> => {
+export const createTemperatureItem = async (data:TemperatureDto): Promise<boolean> => {
     try {
             const body = JSON.stringify(data)
             const resp = await axios.post(`${process.env.REACT_APP_API_URL}/temperature`,body,{
@@ -17,7 +16,7 @@ export const createItem = async (data:TemperatureDto): Promise<boolean> => {
     }
 }
 
-export const listAll = async (): Promise<TemperatureDto[]> => {
+export const listAllTemperature = async (): Promise<TemperatureDto[]> => {
     try {
             const resp = await axios.get(`${process.env.REACT_APP_API_URL}/temperature`,{
                 headers:{
@@ -30,7 +29,7 @@ export const listAll = async (): Promise<TemperatureDto[]> => {
         return [];
     }
 }
-export const getItem = async (id:string): Promise<TemperatureDto | null> => {
+export const getTemperatureItem = async (id:string): Promise<TemperatureDto | null> => {
     try {
             const resp = await axios.get(`${process.env.REACT_APP_API_URL}/temperature/${id}`,{
                 headers:{
@@ -45,7 +44,7 @@ export const getItem = async (id:string): Promise<TemperatureDto | null> => {
 }
 
 
-export const updateItem = async (id:string, data:TemperatureDto): Promise<boolean> => {
+export const updateTemperatureItem = async (id:string, data:TemperatureDto): Promise<boolean> => {
     try {
             const body = JSON.stringify(data)
             const resp = await axios.patch(`${process.env.REACT_APP_API_URL}/temperature/${id}`,body,{
@@ -61,7 +60,7 @@ export const updateItem = async (id:string, data:TemperatureDto): Promise<boolea
     }
 }
 
-export const deleteItem = async (id:string): Promise<boolean> => {
+export const deleteTemperatureItem = async (id:string): Promise<boolean> => {
     try {
             const resp = await axios.delete(`${process.env.REACT_APP_API_URL}/temperature/${id}`,{
                 headers:{

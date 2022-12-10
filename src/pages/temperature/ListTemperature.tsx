@@ -3,7 +3,7 @@ import { Space, Table, Modal, Button } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Link } from 'react-router-dom';
 import { TemperatureDto } from '../../services/dtos/TemperatureDto';
-import {deleteItem, listAll} from '../../services/TemperatureService';
+import {deleteTemperatureItem, listAllTemperature} from '../../services/TemperatureService';
 
 
 export default () =>{
@@ -12,7 +12,8 @@ export default () =>{
     const [items,setItems] = useState<TemperatureDto[]>([])
 
     const fetchAll = async()=>{
-        const all = await listAll()
+        
+        const all = await listAllTemperature()
         setItems(all)
     }
 
@@ -30,7 +31,7 @@ export default () =>{
   }
 
   const onDelete = async() => {
-    const result = await deleteItem(itemId);
+    const result = await deleteTemperatureItem(itemId);
     setIsModalOpen(false);
     if(!result){
         console.log('erro delete')
@@ -45,7 +46,7 @@ export default () =>{
     {
         title: 'id',
         dataIndex: 'id',
-        key: 'id',
+        key: 'idTemperature',
         render: (text) => <a>{text}</a>
     },
     {
@@ -56,11 +57,11 @@ export default () =>{
     {
         title: 'date',
         dataIndex: 'date',
-        key: 'date'
+        key: 'dateTemperature'
     },
     {
         title: 'location',
-        key: 'location',
+        key: 'locationTemperature',
         dataIndex: 'location'
     },
     {
@@ -78,7 +79,7 @@ export default () =>{
 ];
 
     
-  return <><Table rowKey={'Id'} columns={columns} dataSource={itemWithKey} />
+  return <><Table columns={columns} dataSource={itemWithKey} />
   <Modal title='Delete Item?' open={isModalOpen} onOk={onDelete} onCancel={handleCancel}>
         <p>Delete item {itemId}?</p>
     </Modal></>;

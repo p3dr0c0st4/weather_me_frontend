@@ -1,34 +1,35 @@
 import React, { useEffect, useState }  from 'react';
 import { Button, Form, Input, Space } from 'antd';
 import {useParams} from "react-router-dom";
-import { getItem, updateItem } from '../../services/TemperatureService';
+import { getTemperatureItem, updateTemperatureItem } from '../../services/TemperatureService';
 import { TemperatureDto } from '../../services/dtos/TemperatureDto';
 
 
 
 
 export default () => {
-    const [form] = Form.useForm();
+    const [form] = Form.useForm()
     const { id } = useParams()
 
     const [item,setItem] = useState<TemperatureDto>({
-        id: 'fafa',
+        id: 'tempID',
         temperature: 99,
         date: 99,
-        location: 'ututut'
+        location: 'tempLocation'
     })
-        form.setFieldsValue({
-            temperature: item.temperature,
-            date: item.date,
-            location: item.location
-        })
+
+    form.setFieldsValue({
+        temperature: item.temperature,
+        date: item.date,
+        location: item.location
+    })
 
     const fetchAll = async () => {
-        const result = await getItem(id??'');
-        console.log(result);
+        const result = await getTemperatureItem(id??'');
+
         if(!result){
             //TODO: Redirect homepage
-            return 
+            return window.location.replace(`${process.env.REACT_APP_HOMEPAGE}`)    
         }
         setItem(result)
         
@@ -40,7 +41,7 @@ export default () => {
 
     const onFinish = (values: any) => {
 
-        updateItem(values.id, values);
+        updateTemperatureItem(values.id, values);
     };
 
     const onFinishFailed = (errorInfo: any) => {
