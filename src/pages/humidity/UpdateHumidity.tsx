@@ -1,14 +1,40 @@
-import React  from 'react';
+import React, { useEffect, useState }  from 'react';
 import { Button, Form, Input, Space } from 'antd';
 import {useParams} from "react-router-dom";
-import { updateHumidityItem } from '../../services/HumidityService';
+import { getHumidityItem, updateHumidityItem } from '../../services/HumidityService';
+import { HumidityDto } from '../../services/dtos/HumidityDto';
 
 
 
 export default () => {
-    
+    const [form] = Form.useForm()
     const { id } = useParams()
 
+    const [item,setItem] = useState<HumidityDto>({
+        id: 'humID',
+        humidity: 99,
+        date: 99,
+        location: 'humLocation'
+    })
+    form.setFieldsValue({
+        humidity: item.humidity,
+        date: item.date,
+        location: item.location
+    })
+
+    const fetchAll = async () => {
+        const result = await getHumidityItem(id??'');
+
+        if(!result){
+            //TODO: Redirect homepage
+            return window.location.replace(`${process.env.REACT_APP_HOMEPAGE}`)    
+        }
+        setItem(result)
+        
+    }
+    useEffect(()=> {
+        fetchAll().catch((err)=>{console.log(err)});
+    },[])
 
     const onFinish = (values: any) => {
 
@@ -24,6 +50,7 @@ export default () => {
             
             <Space direction="vertical">
             <Form
+                form={form}
                 name="basic"
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
@@ -44,11 +71,11 @@ export default () => {
 
                 <Form.Item
                     style={{ width: 250 }}
-                    label='Temperature'
-                    name="temperature"
-                    key={'temperature'}
+                    label='Humidity'
+                    name="humidity"
+                    key={'humidity'}
                     rules={[{ required: true, message: 'Insert value' }]}
-                    initialValue='temperature'
+                    initialValue={item?.humidity}
                 >
                     <Input />
                 </Form.Item>
@@ -59,7 +86,7 @@ export default () => {
                     name="date"
                     key={'date'}
                     rules={[{ required: true, message: 'Insert date' }]}
-                    initialValue='date'
+                    initialValue={item?.date}
                 >
                     <Input/>
                 </Form.Item>
@@ -70,7 +97,7 @@ export default () => {
                     name="location"
                     key={'location'}
                     rules={[{ required: true, message: 'Insert location' }]}
-                    initialValue='location'
+                    initialValue={item?.location}
                 >
                     <Input />
                 </Form.Item>
