@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, Input, Space } from 'antd';
+import { Button, DatePicker, Form, Input, Space } from 'antd';
 import { createHumidityItem } from '../../services/HumidityService';
 
 export default () => {
@@ -10,6 +10,8 @@ export default () => {
     }
 
     const onFinish = (values: any) => {
+        values.date = (values.date.$y + (values.date.$M + 1) + values.date.$D)
+        
         console.log('Success:', values);
         createHumidityItem(values)
         onReset();
@@ -46,7 +48,7 @@ export default () => {
                     name="date"
                     rules={[{ required: true, message: 'Insert date' }]}
                 >
-                    <Input />
+                    <DatePicker format={'YYYY/MM/DD'}/>
                 </Form.Item>
     
                 <Form.Item
