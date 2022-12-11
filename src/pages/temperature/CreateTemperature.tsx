@@ -4,12 +4,18 @@ import { createTemperatureItem } from '../../services/TemperatureService';
 import { TemperatureDto } from '../../services/dtos/TemperatureDto';
 
 export default () => {
+    const [form] = Form.useForm();
+
+    const onReset = () => {
+    form.resetFields();
+    };
 
     const onFinish = (values: any) => {
         values.date = (values.date.$y + (values.date.$M + 1) + values.date.$D)
 
         console.log('Success:', values);
         createTemperatureItem(values)
+        onReset();
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -26,6 +32,7 @@ export default () => {
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
+                form={form}
             >
                 <Form.Item
                     style={{ width: 250 }}

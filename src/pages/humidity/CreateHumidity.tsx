@@ -3,11 +3,16 @@ import { Button, Form, Input, Space } from 'antd';
 import { createHumidityItem } from '../../services/HumidityService';
 
 export default () => {
+    const [form] = Form.useForm();
 
+    const onReset = () => {
+    form.resetFields();
+    }
 
     const onFinish = (values: any) => {
         console.log('Success:', values);
         createHumidityItem(values)
+        onReset();
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -24,6 +29,7 @@ export default () => {
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
+                form={form}
             >
                 <Form.Item
                     style={{ width: 250 }}
