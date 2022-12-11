@@ -40,8 +40,8 @@ export default () => {
 
 
     const onFinish = (values: any) => {
-
         updateTemperatureItem(values.id, values);
+        return window.location.replace(`${process.env.REACT_APP_HOMEPAGE}/temperature`)
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -52,14 +52,14 @@ export default () => {
             <>
             
             <Space direction="vertical">
-            <Form
-                form={form}
+            <Form    
                 name="basic"
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
+                form={form}
             >
                 <Form.Item
                     style={{ width: 250 }}
