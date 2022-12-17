@@ -33,6 +33,20 @@ export const listAllHumidity = async (): Promise<HumidityDto[]> => {
     }
 }
 
+export const getHumidityItem = async (id:string): Promise<HumidityDto | null> => {
+    try {
+            const resp = await axios.get(`${process.env.REACT_APP_API_URL}/humidity/${id}`,{
+                headers:{
+                    'content-type': 'application/json'
+                }
+            });
+            return resp.data.data
+    } catch (error) {
+        console.log(error)
+        return null
+    }
+}
+
 export const updateHumidityItem = async (id:string, data:HumidityDto): Promise<boolean> => {
     try {
         const body = JSON.stringify(data)

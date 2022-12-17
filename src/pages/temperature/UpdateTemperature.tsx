@@ -1,18 +1,47 @@
-import React  from 'react';
+import React, { useEffect, useState }  from 'react';
 import { Button, Form, Input, Space } from 'antd';
 import {useParams} from "react-router-dom";
-import { updateItem } from '../../services/TemperatureService';
+import { getTemperatureItem, updateTemperatureItem } from '../../services/TemperatureService';
+import { TemperatureDto } from '../../services/dtos/TemperatureDto';
+
 
 
 
 export default () => {
-    
+    const [form] = Form.useForm()
     const { id } = useParams()
+
+    const [item,setItem] = useState<TemperatureDto>({
+        id: 'tempID',
+        temperature: 99,
+        date: 99,
+        location: 'tempLocation'
+    })
+
+    form.setFieldsValue({
+        temperature: item.temperature,
+        date: item.date,
+        location: item.location
+    })
+
+    const fetchAll = async () => {
+        const result = await getTemperatureItem(id??'');
+
+        if(!result){
+            //TODO: Redirect homepage
+            return window.location.replace(`${process.env.REACT_APP_HOMEPAGE}`)    
+        }
+        setItem(result)
+        
+    }
+    useEffect(()=> {
+        fetchAll().catch((err)=>{console.log(err)});
+    },[])
 
 
     const onFinish = (values: any) => {
-
-        updateItem(values.id, values);
+        updateTemperatureItem(values.id, values);
+        return window.location.replace(`${process.env.REACT_APP_HOMEPAGE}/temperature`)
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -23,13 +52,14 @@ export default () => {
             <>
             
             <Space direction="vertical">
-            <Form
+            <Form    
                 name="basic"
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
+                form={form}
             >
                 <Form.Item
                     style={{ width: 250 }}
@@ -46,7 +76,7 @@ export default () => {
                     label='Temperature'
                     name="temperature"
                     rules={[{ required: true, message: 'Insert value' }]}
-                    initialValue='temperature'
+                    initialValue={item?.temperature}
                 >
                     <Input />
                 </Form.Item>
@@ -56,7 +86,7 @@ export default () => {
                     label='Date'
                     name="date"
                     rules={[{ required: true, message: 'Insert date' }]}
-                    initialValue='date'
+                    initialValue={item?.date}
                 >
                     <Input/>
                 </Form.Item>
@@ -66,7 +96,7 @@ export default () => {
                     label='Location'
                     name="location"
                     rules={[{ required: true, message: 'Insert location' }]}
-                    initialValue='location'
+                    initialValue={item?.location}
                 >
                     <Input />
                 </Form.Item>

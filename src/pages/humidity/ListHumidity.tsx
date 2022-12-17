@@ -39,6 +39,8 @@ export default () =>{
     await fetchAll()
   }
 
+const itemWithKey = items.map( item =>  ({...item, key: item.id}) )
+
   const columns: ColumnsType<HumidityDto> = [
     {
         title: 'id',
@@ -76,7 +78,7 @@ export default () =>{
 ];
 
     
-  return <><Table columns={columns} dataSource={items} />
+  return <><Table columns={columns} dataSource={itemWithKey} />
   <Modal title='Delete Item?' open={isModalOpen} onOk={onDelete} onCancel={handleCancel}>
         <p>Delete item {itemId}?</p>
     </Modal></>;
