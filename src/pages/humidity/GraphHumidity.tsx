@@ -1,17 +1,40 @@
 import { Col, Row } from 'antd';
 import {useState, useRef, useEffect} from 'react';
 import * as d3 from 'd3';
+import { listAllHumidity } from '../../services/HumidityService';
 
+type HumidityAndDate = {
+  humidity: number;
+  date: number;
+};
 
 export default () =>{
-  const [data] = useState([
-    [12, 20],
-    [13, 78],
-    [15, 36],
-    [12, 13],
-    [8, 99],
-    [5,80],
-  ] )
+    // fetch data
+
+    const [items,setItems] = useState<HumidityAndDate[]>([])
+
+    const fetchAndConvert = async()=>{
+        
+        const all = await listAllHumidity()
+        
+        const items = all.map((x) => {
+            return  {
+                humidity: x.humidity,
+                date: x.date
+            }
+            
+        })
+        setItems(items)
+
+    }
+
+    useEffect(()=>{
+        fetchAndConvert().catch((err)=>{console.log(err)});
+    },[])
+    
+    
+    const data = items.map((x) => {return [x.humidity, x.date] });
+    
 
   const svgRef:any = useRef();
 
@@ -63,7 +86,6 @@ export default () =>{
         .attr('cy', d => yScale(d[1])) //index 1 of data
         .attr('r', 2); //pointer size
   }, [data]);
-
   
   return (
     <>
