@@ -2,48 +2,39 @@ import { Col, Row } from 'antd';
 import {useState, useRef, useEffect} from 'react';
 import * as d3 from 'd3';
 import { listAllTemperature } from '../../services/TemperatureService';
-import { TemperatureDto } from '../../services/dtos/TemperatureDto';
 
+ type TemperatureAndDate = {
+  temperature: number;
+  date: number;
+};
 
 export default () =>{
     // fetch data
 
-    const [items,setItems] = useState<TemperatureDto[]>([])
+    const [items,setItems] = useState<TemperatureAndDate[]>([])
 
     const fetchAndConvert = async()=>{
         
         const all = await listAllTemperature()
         
         const items = all.map((x) => {
-            const newItems = {
+            return  {
                 temperature: x.temperature,
                 date: x.date
             }
-            return newItems
+            
         })
-        
-        return items;
+        setItems(items)
 
     }
-    const graphData = fetchAndConvert(); 
-    console.log(graphData)
 
     useEffect(()=>{
         fetchAndConvert().catch((err)=>{console.log(err)});
     },[])
     
-    console.log(items);
-
-    // const itemWithKey = items.map( item =>  ({...item, key: item.id}) )
     
-  const [data] = useState([
-    [10, 20],
-    [13, 78],
-    [15, 36],
-    [12, 13],
-    [8, 99],
-    [5,80],
-  ] )
+    const data = items.map((x) => {return [x.temperature, x.date] });
+    
 
   const svgRef:any = useRef();
 
@@ -61,10 +52,10 @@ export default () =>{
 
     // setting up scaling
     const xScale = d3.scaleLinear()
-      .domain([0, 60])
+      .domain([0, 100])
       .range([0, w]);
     const yScale = d3.scaleLinear()
-      .domain([0,100])
+      .domain([0,80])
       .range([h,0]);
 
     // setting up axis
@@ -95,7 +86,7 @@ export default () =>{
         .attr('cy', d => yScale(d[1])) //index 1 of data
         .attr('r', 2); //pointer size
   }, [data]);
-
+  
   
   return (
     <>
