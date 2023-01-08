@@ -38,4 +38,3 @@ export default () => {
     );
 };
 
-// <Link to="/login">Login</Link>
