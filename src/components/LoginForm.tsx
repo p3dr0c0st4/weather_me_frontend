@@ -1,13 +1,20 @@
 import React from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
+import { login } from '../services/User';
+import { LoginDto } from '../services/dtos/LoginDto';
+
 
 export default () => {
 
-  const onFinish = (values: string) => {
-    console.log('Received values of form: ', values);
-
+  const onFinish = (values: LoginDto) => {
+    console.log('Received values from form: ');
+    login(values);
+    // window.location.replace(`${process.env.REACT_APP_HOMEPAGE}`)
+    return
   };
+
+  
 
   return (
     <Form
@@ -33,21 +40,20 @@ export default () => {
           placeholder="Password"
         />
       </Form.Item>
-      <Form.Item>
+      {/* <Form.Item>
         <Form.Item name="remember" valuePropName="checked" noStyle>
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
-
         <a className="login-form-forgot" href="">
           Forgot password
         </a>
-      </Form.Item>
+      </Form.Item> */}
 
       <Form.Item>
         <Button type="primary" htmlType="submit" className="login-form-ButtonElement">
           Log in
         </Button>
-        Or <a href="">register now!</a>
+        {/* Or <a href="">register now!</a> */}
       </Form.Item>
     </Form>
   );
