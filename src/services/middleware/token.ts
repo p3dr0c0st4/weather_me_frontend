@@ -1,5 +1,4 @@
 import Cookies from 'universal-cookie';
-import jwt from 'jwt-decode';
 
 
 
