@@ -7,10 +7,10 @@ import { LoginDto } from '../services/dtos/LoginDto';
 
 export default () => {
 
-  const onFinish = (values: LoginDto) => {
+  const onFinish = async (values: LoginDto) => {
     console.log('Received values from form: ');
-    login(values);
-    // window.location.replace(`${process.env.REACT_APP_HOMEPAGE}`)
+    await login(values);
+    window.location.replace(`${process.env.REACT_APP_HOMEPAGE}`)
     return
   };
 
