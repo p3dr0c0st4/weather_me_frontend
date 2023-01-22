@@ -3,18 +3,19 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { login } from '../services/User';
 import { LoginDto } from '../services/dtos/LoginDto';
+import { useNavigate } from 'react-router-dom';
 
 
-export default () => {
+export default  () => {
+
+  const navigate = useNavigate();
+
 
   const onFinish = async (values: LoginDto) => {
-    console.log('Received values from form: ');
     await login(values);
-    window.location.replace(`${process.env.REACT_APP_HOMEPAGE}`)
-    return
+    navigate('/', {replace: true});
   };
 
-  
 
   return (
     <Form
